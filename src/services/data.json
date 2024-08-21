@@ -1,0 +1,142 @@
+[
+    {
+        "id": 1,
+        "label": "Engrais Azoté",
+        "reference": "ENG-AZ-001",
+        "quantity": 50,
+        "expiration_date": "2024-12-31"
+    },
+    {
+        "id": 2,
+        "label": "Semence de Blé",
+        "reference": "SEM-BL-002",
+        "quantity": 120,
+        "expiration_date": "2025-03-15"
+    },
+    {
+        "id": 3,
+        "label": "Herbicide",
+        "reference": "HERB-003",
+        "quantity": 200,
+        "expiration_date": "2024-09-30"
+    },
+    {
+        "id": 4,
+        "label": "Pesticide",
+        "reference": "PEST-004",
+        "quantity": 80,
+        "expiration_date": "2024-11-25"
+    },
+    {
+        "id": 5,
+        "label": "Fertilisant Organique",
+        "reference": "FERT-ORG-005",
+        "quantity": 60,
+        "expiration_date": "2025-01-10"
+    },
+    {
+        "id": 6,
+        "label": "Outils de Jardinage",
+        "reference": "OUT-JAR-006",
+        "quantity": 30,
+        "expiration_date": "2026-05-20"
+    },
+    {
+        "id": 7,
+        "label": "Traitement pour Grains",
+        "reference": "TRAIT-GRAINS-007",
+        "quantity": 150,
+        "expiration_date": "2024-10-10"
+    },
+    {
+        "id": 8,
+        "label": "Insecticide",
+        "reference": "INS-008",
+        "quantity": 90,
+        "expiration_date": "2025-02-28"
+    },
+    {
+        "id": 9,
+        "label": "Semence de Maïs",
+        "reference": "SEM-MAI-009",
+        "quantity": 200,
+        "expiration_date": "2025-06-01"
+    },
+    {
+        "id": 10,
+        "label": "Engrais Phosphaté",
+        "reference": "ENG-PHOS-010",
+        "quantity": 75,
+        "expiration_date": "2024-12-15"
+    },
+    {
+        "id": 11,
+        "label": "Semence de Riz",
+        "reference": "SEM-RIZ-011",
+        "quantity": 300,
+        "expiration_date": "2025-08-30"
+    },
+    {
+        "id": 12,
+        "label": "Fongicide",
+        "reference": "FONG-012",
+        "quantity": 110,
+        "expiration_date": "2024-11-10"
+    },
+    {
+        "id": 13,
+        "label": "Engrais Potassique",
+        "reference": "ENG-POT-013",
+        "quantity": 65,
+        "expiration_date": "2025-03-20"
+    },
+    {
+        "id": 14,
+        "label": "Piquets de Jardinage",
+        "reference": "PIQU-JAR-014",
+        "quantity": 40,
+        "expiration_date": "2026-01-05"
+    },
+    {
+        "id": 15,
+        "label": "Fertilisant Liquide",
+        "reference": "FERT-LIQ-015",
+        "quantity": 150,
+        "expiration_date": "2025-04-25"
+    },
+    {
+        "id": 16,
+        "label": "Semence de Tomate",
+        "reference": "SEM-TOM-016",
+        "quantity": 500,
+        "expiration_date": "2025-07-15"
+    },
+    {
+        "id": 17,
+        "label": "Herbicide Bio",
+        "reference": "HERB-BIO-017",
+        "quantity": 100,
+        "expiration_date": "2024-12-01"
+    },
+    {
+        "id": 18,
+        "label": "Engrais Complexe",
+        "reference": "ENG-COM-018",
+        "quantity": 85,
+        "expiration_date": "2025-02-15"
+    },
+    {
+        "id": 19,
+        "label": "Pesticide Organique",
+        "reference": "PEST-ORG-019",
+        "quantity": 120,
+        "expiration_date": "2024-09-20"
+    },
+    {
+        "id": 20,
+        "label": "Semence de Haricot",
+        "reference": "SEM-HAR-020",
+        "quantity": 250,
+        "expiration_date": "2025-05-10"
+    }
+]

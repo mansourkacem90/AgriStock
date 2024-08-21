@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/lib/*": ["lib/*"]
+    },
+    "include": ["src"]
+  },
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "__dirname"
+  }
+}
