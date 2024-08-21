@@ -24,7 +24,6 @@ const ProductList = (): React.FC => {
   const [reference, setReference] = useState("");
   const [viewMode, setViewMode] = useState("list");
   const [selectedProduct, setSelectedProduct] = useState({});
-
   const { list, filter } = useProducts();
   const modal = useRef();
 
@@ -54,7 +53,7 @@ const ProductList = (): React.FC => {
           <Typography component="h2" variant="h4" color="text.primary">
             Products List
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="p" color="text.secondary">
             See what our customers love about our products. Discover how we
             epxxcel in efficiency, durability, and satisfaction. Join us for
             quality, innovation, and reliable support.
@@ -157,7 +156,10 @@ const ProductList = (): React.FC => {
         <ToggleViewMode mode={viewMode} toggleViewMode={handleViewMode} />
         <Button
           sx={{ marginLeft: "auto" }}
-          onClick={() => modal.current.setShowModal()}
+          onClick={() => {
+            setSelectedProduct(undefined);
+            modal.current.setShowModal();
+          }}
         >
           Add New Product
         </Button>

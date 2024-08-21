@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useImperativeHandle } from "react";
 
 import Dialog from "@mui/material/Dialog";
+import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import { TextField, FormControl, Button } from "@mui/material";
+import { TextField } from "@mui/material";
 import moment from "moment";
 
 import { useProducts } from "lib/hooks/useProduct";
@@ -16,54 +17,63 @@ import { IProduct } from "lib/utils/commons/interfaces";
 declare interface IProductManagementProps {
   product: IProduct;
   ref: React.RefObject<HTMLInputElement>;
+  create?: boolean;
 }
 export const ProductManagement = React.forwardRef(
   ({ product }, ref): IProductManagementProps => {
     const { manageProducts } = useProducts();
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-
     const [prd, setPrd] = useState({
       label: "",
       reference: "",
       quantity: 0,
       expiration_date: moment(new Date()).format("YYYY-MM-DD"),
     });
+    const [blur, setBlur] = useState("");
     const [modalVisibility, setModalVisibility] = useState(false);
-    const [productError, setProductError] = useState(false);
+    const [productError, setProductError] = useState({
+      label: false,
+      reference: false,
+      quantity: false,
+    });
 
     useEffect(() => {
-      if (product?.id) {
+      if (product) {
         setPrd({
           ...product,
         });
       }
-    }, [product?.id]);
+      setProductError({
+        ...productError,
+        label: !product?.label,
+        reference: !product?.reference,
+        quantity: !product?.quantity,
+      });
+    }, [product]);
     useImperativeHandle(ref, () => ({
       setShowModal: () => setModalVisibility(true),
       setCloseModal: () => setModalVisibility(false),
     }));
     const handleSubmit = (event) => {
       event.preventDefault();
+      resetData();
       manageProducts(prd);
       setModalVisibility(false);
-      // setEmailError(false);
-      // setPasswordError(false);
-
-      // if (email == "") {
-      //   setEmailError(true);
-      // }
-      // if (password == "") {
-      //   setPasswordError(true);
-      // }
-
-      // if (email && password) {
-      //   console.log(email, password);
-      // }
     };
 
     const handleClose = () => {
+      resetData();
       setModalVisibility(false);
+    };
+    const resetData = () => {
+      setPrd({
+        label: "",
+        reference: "",
+        quantity: 0,
+        expiration_date: moment(new Date()).format("YYYY-MM-DD"),
+      });
+      setBlur("");
     };
 
     const handleData = (e) => {
@@ -75,7 +85,13 @@ export const ProductManagement = React.forwardRef(
             ? moment(new Date(value)).format("YYYY-MM-DD")
             : value,
       });
+      setProductError({
+        ...productError,
+        [name]: name == "quantity" ? value < 0 : !value,
+      });
     };
+    const { label, reference, quantity } = productError;
+
     return (
       <React.Fragment>
         <Dialog
@@ -88,11 +104,11 @@ export const ProductManagement = React.forwardRef(
             id="responsive-dialog-title"
             sx={{ background: "blue", color: "white" }}
           >
-            {`Edit product`}
+            {`${product ? "Edit product" : "Add New Product"}`}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              <form autoComplete="off" onSubmit={handleSubmit}>
+              <form autoComplete="off" onSubmit={handleSubmit} noValidate>
                 <TextField
                   label="Label"
                   onChange={handleData}
@@ -104,7 +120,11 @@ export const ProductManagement = React.forwardRef(
                   sx={{ mb: 3, mt: 3 }}
                   fullWidth
                   value={prd?.label}
-                  // error={emailError}
+                  error={label}
+                  onBlur={() => setBlur("label")}
+                  helperText={
+                    label && blur == "label" ? "label should not be empty" : ""
+                  }
                 />
                 <TextField
                   label="Reference"
@@ -115,7 +135,13 @@ export const ProductManagement = React.forwardRef(
                   color="secondary"
                   type="text"
                   value={prd?.reference}
-                  // error={passwordError}
+                  error={reference}
+                  onBlur={() => setBlur("reference")}
+                  helperText={
+                    reference && blur == "reference"
+                      ? "reference should not be empty"
+                      : ""
+                  }
                   fullWidth
                   sx={{ mb: 3 }}
                 />
@@ -128,7 +154,13 @@ export const ProductManagement = React.forwardRef(
                   color="secondary"
                   type="number"
                   value={prd?.quantity}
-                  // error={passwordError}
+                  error={quantity}
+                  onBlur={() => setBlur("quantity")}
+                  helperText={
+                    quantity && blur == "quantity"
+                      ? "quantity should not be less than 0 value"
+                      : ""
+                  }
                   fullWidth
                   sx={{ mb: 3 }}
                 />
@@ -162,6 +194,7 @@ export const ProductManagement = React.forwardRef(
               autoFocus
               variant="contained"
               color="primary"
+              disabled={label || reference || quantity}
             >
               Confirm
             </Button>
