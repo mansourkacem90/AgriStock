@@ -1,9 +1,9 @@
 import React, { createContext, useReducer } from "react";
-
+import list from "services/data.json";
 import { ProductReducer } from "lib/reducers/ProductReducer";
 export const ProductsContext = createContext([]);
 
-const products = JSON.parse(localStorage.getItem("productsList"));
+const products = JSON.parse(localStorage.getItem("productsList")) || list;
 const initialState = products;
 
 const ProductsContextProvider = ({ children }) => {
