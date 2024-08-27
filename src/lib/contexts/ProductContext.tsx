@@ -1,9 +1,8 @@
 import React, { createContext, useReducer } from "react";
-import list from "services/data.json";
 import { ProductReducer } from "lib/reducers/ProductReducer";
 export const ProductsContext = createContext([]);
 
-const products = JSON.parse(localStorage.getItem("productsList")) || list;
+const products = JSON.parse(localStorage.getItem("productsList")) || [];
 const initialState = products;
 
 const ProductsContextProvider = ({ children }) => {
@@ -18,7 +17,11 @@ const ProductsContextProvider = ({ children }) => {
   const deleteProduct = (payload) => {
     dispatch({ type: "REMOVE_PRODUCT", payload });
   };
+  const initializeProductsList = (payload) => {
+    dispatch({ type: "INITIALIZE_PRODUCTS_LIST", payload });
+  };
   const contextValues = {
+    initializeProductsList,
     filter,
     manageProducts,
     deleteProduct,

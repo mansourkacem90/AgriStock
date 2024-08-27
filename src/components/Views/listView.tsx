@@ -5,7 +5,6 @@ import { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
 
 import { ActionsColumn } from "./ActionsColumn";
-import { ProductManagement } from "components/Dialogs/ProductManagement";
 import { useProducts } from "lib/hooks/useProduct";
 import { IProduct } from "lib/utils/commons/interfaces";
 declare interface ILisViewProps {

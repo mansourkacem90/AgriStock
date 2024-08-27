@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 
 import { PaletteMode } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,7 +10,8 @@ import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 
 import NavBar from "./NavBar";
 import getLPTheme from "../../lib/utils/getLLPTheme";
-
+import { useProducts } from "lib/hooks/useProduct";
+import data from "services/data.json";
 interface ToggleCustomThemeProps {
   showCustomTheme: Boolean;
   toggleCustomTheme: () => void;
@@ -59,6 +60,14 @@ export const Layout = React.memo(({ children }): FC => {
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
   const defaultTheme = createTheme({ palette: { mode } });
+  const { initializeProductsList } = useProducts();
+
+  useEffect(() => {
+    if (!localStorage.getItem("initialized")) {
+      localStorage.setItem("initialized", true);
+      initializeProductsList([...data]);
+    }
+  }, []);
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === "dark" ? "light" : "dark"));

@@ -1,9 +1,21 @@
 import { isInclude } from "lib/utils/commons/helpers";
-const products = JSON.parse(localStorage.getItem("productsList"));
+const products = JSON.parse(localStorage.getItem("productsList")) || [];
 export const ProductReducer = (state = [...products], action) => {
   switch (action.type) {
+    case "INITIALIZE_PRODUCTS_LIST":
+      const initialList = [...action.payload];
+      localStorage.setItem("productsList", JSON.stringify(initialList));
+      return initialList;
     case "FILTER":
-      const filtredList = products.filter(({ label, id, reference }) => {
+      console.log(
+        'localStorage.getItem("productsList")',
+        localStorage.getItem("productsList"),
+        products
+      );
+
+      const filtredList = JSON.parse(
+        localStorage.getItem("productsList")
+      ).filter(({ label, id, reference }) => {
         return (
           isInclude(label, action.payload.label) &&
           isInclude(String(id), String(action.payload.id)) &&
